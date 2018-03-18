@@ -31,9 +31,7 @@ public class POFactory {
     public int getAuthorId(String authorName) throws Exception {
 
         int authorID = 0;
-
         HttpResponse<String> getResponse = Unirest.get(URL + "/api/author_url/" + authorName + "?key=" + KEY).asString();
-
         Document document = parseXML(getResponse.getBody());
 
         NodeList authorList = document.getElementsByTagName("author");
@@ -93,19 +91,12 @@ public class POFactory {
             Document document = parseXML(response.getBody());
 
             NodeList books = document.getElementsByTagName("book");
-
             for (int temp = 0; temp < books.getLength(); temp++) {
 
                 Node nNode = books.item(temp);
-
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element eElement = (Element) nNode;
-
-//                System.out.println("Book id : " + eElement.getElementsByTagName("id").item(0).getTextContent());
-//                System.out.println("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent());
-//                System.out.println("Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
-//                System.out.println("Image address : " + eElement.getElementsByTagName("image_url").item(0).getTextContent());
 
                     authorsBooks[iterator][0] = eElement.getElementsByTagName("id").item(0).getTextContent();
                     authorsBooks[iterator][1] = eElement.getElementsByTagName("title").item(0).getTextContent();
@@ -118,17 +109,4 @@ public class POFactory {
         }
         return authorsBooks;
     }
-
-    public void outAll(String authorName) throws Exception{
-        String[][] end = booksList(authorName);
-        for (int i = 0; i < end.length; i++){
-            for (int j = 0; j < end[i].length; j++){
-                if (!end[i][2].equals(authorName))
-                    System.out.print("Record #: " + i + " : " + end[i][j] + " : ");
-            }
-            System.out.println();
-        }
-    }
-
-
 }

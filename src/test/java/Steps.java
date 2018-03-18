@@ -24,12 +24,8 @@ public class Steps {
     public void checkAuthors(String authorName) {
         SoftAssert softAssert = new SoftAssert();
         for (int i = 0; i < _actualResult.length; i++){
-//            for (int j = 0; j < _actualResult[i].length; j++)
-                softAssert.assertTrue(_actualResult[i][2].contains(authorName), "Failed with: " +
-                        _actualResult[i][0] + " : " + _actualResult[i][1] + " : " + _actualResult[i][2] + " : " + _actualResult[i][3]);
-
-//                    System.out.print("Record #: " + i + " : " + _actualResult[i] + " : ");
-//            }
+            softAssert.assertTrue(_actualResult[i][2].contains(authorName), "Failed with: " +
+                    _actualResult[i][0] + " : " + _actualResult[i][1] + " : " + _actualResult[i][2] + " : " + _actualResult[i][3]);
         }
         softAssert.assertAll();
     }
